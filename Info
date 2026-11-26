@@ -1,0 +1,31 @@
+Executive Summary & Stated Purpose
+
+This project provides a developer guide and setup harness for native Nintendo Switch porting (compiling C/C++ with devkitPro and libnx into .nro files). It focuses on pairing open-source AI agents with local or hosted coding models to navigate large C/C++ codebases, troubleshoot devkitA64 cross-compilation errors, and implement native Switch subsystems.
+
+Key Technical Specifications & Tooling
+
+Best Free AI Setups for C/C++ Switch Porting
+ * OpenCode + Free Hosted/Local Models (OpenCode Zen / Ollama): Serves as an open-source terminal/IDE coding agent that executes multi-file edits, inspects workspace directories, and iteratively resolves build errors without restrictive cloud caps.
+ * Gemini CLI / Code Assist: Ideal for analyzing large repositories due to its high request limits and massive context window, allowing full engine directories and libnx headers to be processed simultaneously.
+ * Aider / Cline / Roo Code: Terminal and extension-based agents for direct repository editing, Git integration, and model routing (via OpenRouter or local endpoints).
+ * Local Models (Qwen-Coder / DeepSeek via Ollama): Enables offline, rate-limit-free C++ refactoring for developers with dedicated VRAM/RAM (32GB+ recommended for heavy agent loops).
+
+Core Development Guidelines
+
+Native Switch Porting Workflows
+ * Targeted Error Iteration: Feed compiler (devkitA64-gcc) and linker logs along with CMake/Makefile snippets directly to the AI agent rather than asking for full automated ports.
+ * Header & API Grounding: Point coding agents directly to local SDK headers (/opt/devkitpro/libnx/include) to prevent hallucinations of deprecated or non-existent libnx functions.
+ * Incremental Edits: Refactor one subsystem at a time (graphics, audio, input, filesystem) and verify compilation after each step.
+ * Reference Existing Patterns: Leverage established homebrew repositories and hardware-accelerated backends (such as switch-sdl2, switch-mesa, or deko3D).
+
+Porting Target Playbooks
+
+Path A: Standalone Emulator Launcher Wrapper (e.g., tico-duckstation)
+ * Toolchain Setup: Install devkitPro with switch-dev and switch-uam packages.
+ * Context Rules: Configure workspace rules (AGENTS.md) targeting aarch64-none-elf and restricting edits to the launcher lifecycle.
+ * Frontend Modification: Modify the nogui frontend entrypoint to auto-boot specified game ISOs/CHDs from sdmc:/switch/<project_folder>/ while isolating memory cards and saves.
+
+Path B: Static Recompilation Porting (e.g., threads-of-fate-recomp)
+ * Asset Generation: Extract game assets and recompiled C source files via PC build tools.
+ * Platform Layer Abstraction: Task the AI with identifying and replacing OS-specific Win32/desktop dependencies with POSIX/libnx equivalents.
+ * Subsystem Mapping: Implement Switch-native windowing, graphics (deko3D or switch-sdl2), audio, and gamepad bindings using custom Makefile.switch configurations.
