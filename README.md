@@ -1,3 +1,9 @@
+This is my attempt at trying to create a port for the switch.
+I'm starting with a favourite of mine and was glad to have stumbled on a project as a starting point.
+All my thanks goes to the original author of the project!
+
+Please check out the original github project for current releases.
+
 <p align="center"><a href="https://alexbeavs-ps1-ports.github.io/psxrecomp-ports/"><img src="https://raw.githubusercontent.com/alexbeavs-ps1-ports/psxrecomp-ports/main/docs/assets/alexbeav-ps1-recomps-banner.png" alt="Alexbeav's PS1 Recomps" width="100%"></a></p>
 
 # Threads of Fate Recompiled
